@@ -51,6 +51,23 @@ input {
   background: white;
 }
 
+.msg-erro {
+  width: 50%;
+  display: flex;
+  margin: 0 auto;
+  margin-top: 10px;
+}
+
+.msg-erro span {
+  width: 100%;
+  justify-content: center;
+  background: #a70000;
+  border: 2px solid black;
+  border-radius: 10px;
+  color: white;
+  padding: 8px;
+}
+
 
 .content {
   display: flex;
@@ -112,6 +129,10 @@ span {
 
   form {
     width: 100% !important;
+  }
+
+  .msg-erro {
+    width: 100%;
   }
 
   .title {

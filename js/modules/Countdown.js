@@ -42,16 +42,17 @@ export default class Countdown {
     }
   }
 
-  createElement(title) {
+  createElementCountdown(title) {
     const containerResult = document.querySelector('.container-result');
     const div = document.createElement('div');
     const h1 = document.createElement('h1');
     const button = document.createElement('button');
     const span = document.createElement('span');
 
+    title = title.replace(' ', '-');
     div.classList.add('content', title);
     h1.classList.add('title');
-    h1.innerText = `Tempo para o ${title}`;
+    h1.innerText = `Tempo para o ${title.replace('-', ' ')}`;
     button.classList.add('btn-delete');
     button.innerHTML = '<i class="far fa-trash-alt"></i>';
     span.setAttribute('data-event', title);
@@ -61,7 +62,7 @@ export default class Countdown {
 
     containerResult.appendChild(div);
     
-    span.innerText = `Faltam ${this.total.days} dias, ${this.total.hours} horas, ${this.total.minutes} minutos e ${this.total.seconds} segundos para o ${title}!`
+    span.innerText = `Faltam ${this.total.days} dias, ${this.total.hours} horas, ${this.total.minutes} minutos e ${this.total.seconds} segundos para o ${title.replace('-', ' ')}!`
     
     this.doCountdown(span, title);
   }
@@ -83,10 +84,24 @@ export default class Countdown {
   }
 
   deleteCountdown(element) {
-    const div = document.querySelector(`.${element}`);
+    const div = document.querySelector(`.${element.replace(' ', '-')}`);
     if(div) {
       div.remove();
       this.verificaCountdown = false;
     }
+  }
+
+  createElementError(event) {
+    const containerMsgErro = document.querySelector('.container-msg-erro');
+
+    const div = document.createElement('div');
+    const span = document.createElement('span');
+
+    div.classList.add('msg-erro');
+    div.setAttribute('data-erro', event);
+    span.innerText = `Já existe um Countdown para ${event}!`;
+
+    div.appendChild(span);
+    containerMsgErro.appendChild(div);
   }
 }
