@@ -62,6 +62,7 @@ export default class Countdown {
     containerResult.appendChild(div);
     
     span.innerText = `Faltam ${this.total.days} dias, ${this.total.hours} horas, ${this.total.minutes} minutos e ${this.total.seconds} segundos para o ${title}!`
+    
     this.doCountdown(span, title);
   }
 
@@ -74,7 +75,6 @@ export default class Countdown {
           clearInterval(countdown);
         } else {
           element.innerText = `Faltam ${this.total.days} dias, ${this.total.hours} horas, ${this.total.minutes} minutos e ${this.total.seconds} segundos para o ${diaEspecial}!`;
-          console.log('teste');
         }
       }else {
         clearInterval(countdown);
@@ -84,8 +84,9 @@ export default class Countdown {
 
   deleteCountdown(element) {
     const div = document.querySelector(`.${element}`);
-    console.log(div);
-    div.remove();
-    this.verificaCountdown = false;
+    if(div) {
+      div.remove();
+      this.verificaCountdown = false;
+    }
   }
 }

@@ -60,6 +60,7 @@ input {
 }
 
 .title{
+  display: flex;
   color: white;
   background: black;
   border: 1px solid black;
@@ -73,6 +74,7 @@ input {
   width: 50px;
   height: 50px;
   top: 5px;
+  right: -55px;
   background: #696969;
   border: 2px solid #696969;
   color: white;
@@ -91,7 +93,49 @@ input {
 }
 
 span {
+  justify-content: center;
+  text-align: center;
+  width: 100%;
   font-size: 24px;
   font-weight: bold;
+
 }
 
+@media (max-width: 576px) {
+  .main-title {
+    font-size: 26px;
+  }
+
+  .container-input {
+    width: 100% !important;
+  }
+
+  form {
+    width: 100% !important;
+  }
+
+  .title {
+    align-items: center;
+    font-size: 24px;
+    text-align: center;
+  }
+
+  .btn-delete {
+    position: unset;
+  }
+}
+
+@media (max-width: 885px) {
+  form {
+    width: 50%;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  input {
+    width: 90%;
+  }
+  .addDate {
+    margin: 0 auto;
+  }
+}
