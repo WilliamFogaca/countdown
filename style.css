@@ -1,0 +1,97 @@
+.main-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container-input {
+  display: flex;
+  justify-content: center;
+}
+
+form {
+  display: flex;
+  align-items: center;
+  border: 2px solid black;
+  border-radius: 20px;
+  padding: 10px;
+}
+
+label {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 10px;
+}
+
+input {
+  height: 30px;
+  border: 1px solid black;
+  margin: 10px;
+  padding: 5px;
+  outline: none;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.addDate {
+  width: 200px;
+  color: white;
+  background: black;
+  border: 2px solid black;
+  border-radius: 10px;
+  margin: 10px;
+  padding: 10px;
+  font-size: 20px;
+  cursor: pointer;
+  outline: none;
+}
+
+.addDate:hover {
+  color: black;
+  background: white;
+}
+
+
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.title{
+  color: white;
+  background: black;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 10px 10px;
+  position: relative;
+}
+
+.btn-delete {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  top: 5px;
+  background: #696969;
+  border: 2px solid #696969;
+  color: white;
+  border-radius: 10px;
+  font-size: 30px;
+  cursor: pointer;
+  padding: 5px;
+  margin-left: 20px; 
+  outline: none;
+}
+
+.btn-delete:hover {
+  background: #a70000;
+  border: 2px solid #a70000;
+  color: white;
+}
+
+span {
+  font-size: 24px;
+  font-weight: bold;
+}
+
