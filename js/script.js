@@ -37,6 +37,7 @@ function addClickBtnDelete(countdown, event) {
 
 function handleClickDelete(countdown, title) {
   countdown.deleteCountdown(title);
+  localStorage.removeItem(title);
 }
 
 function handleClick(event) {
