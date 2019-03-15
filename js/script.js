@@ -36,22 +36,20 @@ function setValuesLocalStorage() {
 
 setValuesLocalStorage();
 
-function toggleModal(event) {
-  event.preventDefault();
-  const containerModal = document.querySelector('.container-modal');
-  containerModal.classList.toggle('ativo');
+function toggleModal(modal) {
+  modal.classList.toggle('ativo');
 }
 
-function cliqueForaModal(event) {
-  if (event.target === this) {
-    toggleModal(event);
+function cliqueForaModal(event, modal) {
+  if (event.target === modal) {
+    toggleModal(modal);
   }
 }
 
 function handleClickDelete(countdown, title, modal) {
   countdown.deleteCountdown(title);
   localStorage.removeItem(title);
-  modal.classList.remove('ativo');
+  toggleModal(modal);
 
   const indexofInput = events.indexOf(title);
   events.splice(indexofInput, 1);
@@ -63,25 +61,23 @@ function handleClickDelete(countdown, title, modal) {
   }
 }
 
-
 function addClickBtnDelete(countdown, event) {
   const botoes = document.querySelectorAll('.btn-delete');
   if (botoes) {
     const deleteDate = botoes[botoes.length - 1];
-    const containerModal = document.querySelector('.container-modal');
-    const deleteDateModal = document.querySelector('.delete-date-modal');
+    const containerModal = document.querySelector(`[data-modal="${event}"]`);
+    const deleteDateModal = document.querySelector(`[data-delete-date-modal="${event}"]`);
     const fechar = document.querySelector('.fechar');
 
-    deleteDate.addEventListener('click', toggleModal);
+    deleteDate.addEventListener('click', () => toggleModal(containerModal));
 
     deleteDateModal.addEventListener('click', () => handleClickDelete(countdown, event, containerModal));
 
-    containerModal.addEventListener('click', cliqueForaModal);
+    containerModal.addEventListener('click', (e) => cliqueForaModal(e, containerModal));
 
-    fechar.addEventListener('click', toggleModal);
+    fechar.addEventListener('click', () => toggleModal(containerModal));
   }
 }
-
 
 function handleClick(event) {
   event.preventDefault();

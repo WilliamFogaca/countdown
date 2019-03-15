@@ -62,8 +62,10 @@ export default class Countdown {
 
   deleteCountdown(element) {
     const div = document.querySelector(`[data-container-countdown="${element}"]`);
-    if(div) {
+    const modal = document.querySelector(`[data-modal="${element}"]`);
+    if(div && modal) {
       div.remove();
+      modal.remove();
       this.verificaCountdown = false;
     }
   }
