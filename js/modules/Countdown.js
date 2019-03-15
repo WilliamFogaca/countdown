@@ -49,7 +49,7 @@ export default class Countdown {
     const countdown = setInterval(() => {
       if(this.verificaCountdown) {
         if (this.total.days <= 0 && this.total.hours <= 0 && this.total.minutes <= 0 && this.total.seconds <= 0) {
-          element.innerText = `O ${diaEspecial} já passou. Ajuste a data para fazer a contagem regressiva novamente!`;
+          element.innerText = `O ${diaEspecial} já passou. Crie um novo Countdown para essa data!`;
           clearInterval(countdown);
         } else {
           element.innerText = `Faltam ${this.total.days} dias, ${this.total.hours} horas, ${this.total.minutes} minutos e ${this.total.seconds} segundos para o ${diaEspecial}!`;

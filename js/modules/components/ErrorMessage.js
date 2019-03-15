@@ -10,6 +10,8 @@ export default function CreateErrorMessage(event, erroType) {
       span.innerText = `Já existe um Countdown para ${event}!`;
     } else if(erroType === 2) {
       span.innerText = `Os campos acima são obrigatórios!`;
+    } else if(erroType === 3) {
+      span.innerText = `Preencha o campo 'Data' com uma data futura!`;
     }
 
     div.appendChild(span);
