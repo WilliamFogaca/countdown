@@ -24,13 +24,13 @@ function saveValuesLocalStorage(date, event) {
 }
 
 function setValuesLocalStorage() {
-  const properties = Object.keys(localStorage); 
+  const properties = Object.keys(localStorage);
   properties.forEach((propertie) => {
-    const jsonCountdown = JSON.parse(localStorage[propertie]); 
+    const jsonCountdown = JSON.parse(localStorage[propertie]);
     const tempoParaData = new Countdown(`${jsonCountdown.date} 23:59:59 GMT-0300`);
 
-    CreateCountdownElement(jsonCountdown.event, tempoParaData); 
-    addClickBtnDelete(tempoParaData, jsonCountdown.event); 
+    CreateCountdownElement(jsonCountdown.event, tempoParaData);
+    addClickBtnDelete(tempoParaData, jsonCountdown.event);
   });
 }
 
@@ -87,15 +87,15 @@ function handleClick(event) {
   event.preventDefault();
   const inputDate = document.getElementById('date').value;
   const inputEvent = document.getElementById('event').value;
+
+  const msgErro = document.querySelector(`[data-erro]`);
+  const containerMsgErro = document.querySelector('.container-msg-erro');
+
+  if (msgErro) {
+    containerMsgErro.removeChild(msgErro);
+  }
+
   if (inputDate && inputEvent) {
-
-    const msgErro = document.querySelector(`[data-erro]`);
-    const containerMsgErro = document.querySelector('.container-msg-erro');
-
-    if (msgErro) {
-      containerMsgErro.removeChild(msgErro);
-    }
-
     const tempoParaData = new Countdown(`${inputDate} 23:59:59 GMT-0300`);
 
     if (events.indexOf(inputEvent.toUpperCase()) === -1 && !localStorage[inputEvent]) {
@@ -105,8 +105,10 @@ function handleClick(event) {
       events.push(inputEvent.toUpperCase());
       addClickBtnDelete(tempoParaData, inputEvent);
     } else {
-      CreateErrorMessage(inputEvent);
+      CreateErrorMessage(inputEvent, 1);
     }
+  } else {
+    CreateErrorMessage(inputEvent, 2);
   }
 }
 
