@@ -25,17 +25,43 @@ function setValuesLocalStorage() {
 
 setValuesLocalStorage();
 
+
+
+function toggleModal(event, modal) {
+  event.preventDefault();
+  const containerModal = document.querySelector('.container-modal');
+  containerModal.classList.toggle('ativo');
+}
+
+function cliqueForaModal(event) {
+  if(event.target === this){
+    toggleModal(event);
+  }
+}
+
 function addClickBtnDelete(countdown, event) {
   const botoes = document.querySelectorAll('.btn-delete');
   if(botoes) {
     const deleteDate = botoes[botoes.length - 1];
-    deleteDate.addEventListener('click', () => handleClickDelete(countdown, event));
+    const containerModal = document.querySelector('.container-modal');
+    const deleteDateModal = document.querySelector('.delete-date-modal');
+    const fechar = document.querySelector('.fechar');
+
+    deleteDate.addEventListener('click', toggleModal);
+
+    deleteDateModal.addEventListener('click', () => handleClickDelete(countdown, event, containerModal));
+    
+    containerModal.addEventListener('click', cliqueForaModal);
+
+    fechar.addEventListener('click', toggleModal);
+
   }
 }
 
-function handleClickDelete(countdown, title) {
+function handleClickDelete(countdown, title, modal) {
   countdown.deleteCountdown(title);
   localStorage.removeItem(title);
+  modal.classList.remove('ativo');
   const msgErro = document.querySelector(`[data-erro]`);
   const containerMsgErro = document.querySelector('.container-msg-erro');
   if(msgErro) {
