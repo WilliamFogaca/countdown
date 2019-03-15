@@ -1,5 +1,10 @@
 import Countdown from "./modules/Countdown.js";
 
+var actualDate = new Date().toISOString().split('T')[0];
+const inputCalendar = document.querySelector('input[type="date"]');
+inputCalendar.setAttribute('min', actualDate);
+
+
 const addDate = document.querySelector('.addDate');
 
 function saveValuesLocalStorage(date, event) {
@@ -43,7 +48,7 @@ function handleClickDelete(countdown, title, modal) {
   countdown.deleteCountdown(title);
   localStorage.removeItem(title);
   modal.classList.remove('ativo');
-  
+
   const indexofInput = events.indexOf(title);
   events.splice(indexofInput, 1);
 
