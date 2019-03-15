@@ -3,9 +3,11 @@ export default class Countdown {
     this.futureDate = futureDate;
     this.verificaCountdown = true;
   }
+
   get _actualDate() {
     return new Date();
   }
+
   get _futureDate() {
     return new Date(this.futureDate);
   }
@@ -42,31 +44,6 @@ export default class Countdown {
     }
   }
 
-  createElementCountdown(title) {
-    const containerResult = document.querySelector('.container-result');
-
-    const div = document.createElement('div');
-    const h1 = document.createElement('h1');
-    const button = document.createElement('button');
-    const span = document.createElement('span');
-
-    div.setAttribute('data-container-countdown', title);
-    h1.classList.add('title');
-    h1.innerText = `Tempo para o ${title}`;
-    button.classList.add('btn-delete');
-    button.innerHTML = '<i class="far fa-trash-alt"></i>';
-    span.setAttribute('data-event', title);
-    h1.appendChild(button);
-    div.appendChild(h1);
-    div.appendChild(span);
-
-    containerResult.appendChild(div);
-    
-    span.innerText = `Faltam ${this.total.days} dias, ${this.total.hours} horas, ${this.total.minutes} minutos e ${this.total.seconds} segundos para o ${title}!`
-    
-    this.doCountdown(span, title);
-  }
-
   doCountdown(element, diaEspecial) {
     this.verificaCountdown = true;
     const countdown = setInterval(() => {
@@ -91,17 +68,4 @@ export default class Countdown {
     }
   }
 
-  createElementError(event) {
-    const containerMsgErro = document.querySelector('.container-msg-erro');
-
-    const div = document.createElement('div');
-    const span = document.createElement('span');
-
-    div.classList.add('msg-erro');
-    div.setAttribute('data-erro', event);
-    span.innerText = `Já existe um Countdown para ${event}!`;
-
-    div.appendChild(span);
-    containerMsgErro.appendChild(div);
-  }
 }

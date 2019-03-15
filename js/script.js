@@ -1,11 +1,18 @@
+//Class
 import Countdown from "./modules/Countdown.js";
 
-var actualDate = new Date().toISOString().split('T')[0];
+//Components
+import CreateErrorMessage from "./modules/components/ErrorMessage.js";
+import CreateCountdownElement from "./modules/components/CountdownElement.js";
+
+const actualDate = new Date().toISOString().split('T')[0];
+
 const inputCalendar = document.querySelector('input[type="date"]');
 inputCalendar.setAttribute('min', actualDate);
 
-
 const addDate = document.querySelector('.addDate');
+
+let events = [];
 
 function saveValuesLocalStorage(date, event) {
   const countdown = {
@@ -17,29 +24,26 @@ function saveValuesLocalStorage(date, event) {
 }
 
 function setValuesLocalStorage() {
-  const properties = Object.keys(localStorage);
+  const properties = Object.keys(localStorage); 
   properties.forEach((propertie) => {
-
-    const jsonCountdown = JSON.parse(localStorage[propertie]);
+    const jsonCountdown = JSON.parse(localStorage[propertie]); 
     const tempoParaData = new Countdown(`${jsonCountdown.date} 23:59:59 GMT-0300`);
 
-    tempoParaData.createElementCountdown(jsonCountdown.event);
-    addClickBtnDelete(tempoParaData, jsonCountdown.event);
+    CreateCountdownElement(jsonCountdown.event, tempoParaData); 
+    addClickBtnDelete(tempoParaData, jsonCountdown.event); 
   });
 }
 
 setValuesLocalStorage();
 
-
-
-function toggleModal(event, modal) {
+function toggleModal(event) {
   event.preventDefault();
   const containerModal = document.querySelector('.container-modal');
   containerModal.classList.toggle('ativo');
 }
 
 function cliqueForaModal(event) {
-  if(event.target === this){
+  if (event.target === this) {
     toggleModal(event);
   }
 }
@@ -54,14 +58,15 @@ function handleClickDelete(countdown, title, modal) {
 
   const msgErro = document.querySelector(`[data-erro]`);
   const containerMsgErro = document.querySelector('.container-msg-erro');
-  if(msgErro) {
+  if (msgErro) {
     containerMsgErro.removeChild(msgErro);
   }
 }
 
+
 function addClickBtnDelete(countdown, event) {
   const botoes = document.querySelectorAll('.btn-delete');
-  if(botoes) {
+  if (botoes) {
     const deleteDate = botoes[botoes.length - 1];
     const containerModal = document.querySelector('.container-modal');
     const deleteDateModal = document.querySelector('.delete-date-modal');
@@ -70,42 +75,39 @@ function addClickBtnDelete(countdown, event) {
     deleteDate.addEventListener('click', toggleModal);
 
     deleteDateModal.addEventListener('click', () => handleClickDelete(countdown, event, containerModal));
-    
+
     containerModal.addEventListener('click', cliqueForaModal);
 
     fechar.addEventListener('click', toggleModal);
-
   }
 }
 
-let events = [];
 
 function handleClick(event) {
   event.preventDefault();
   const inputDate = document.getElementById('date').value;
   const inputEvent = document.getElementById('event').value;
-  if(inputDate && inputEvent) {
-    
+  if (inputDate && inputEvent) {
+
     const msgErro = document.querySelector(`[data-erro]`);
     const containerMsgErro = document.querySelector('.container-msg-erro');
 
-    if(msgErro) {
+    if (msgErro) {
       containerMsgErro.removeChild(msgErro);
     }
 
     const tempoParaData = new Countdown(`${inputDate} 23:59:59 GMT-0300`);
 
-    if(events.indexOf(inputEvent.toUpperCase()) === -1 && !localStorage[inputEvent]) {
+    if (events.indexOf(inputEvent.toUpperCase()) === -1 && !localStorage[inputEvent]) {
       saveValuesLocalStorage(inputDate, inputEvent);
-      tempoParaData.createElementCountdown(inputEvent);
+      CreateCountdownElement(inputEvent, tempoParaData);
+
       events.push(inputEvent.toUpperCase());
       addClickBtnDelete(tempoParaData, inputEvent);
-    }else {
-      tempoParaData.createElementError(inputEvent);
+    } else {
+      CreateErrorMessage(inputEvent);
     }
   }
 }
-
-console.log(events);
 
 addDate.addEventListener('click', handleClick);
