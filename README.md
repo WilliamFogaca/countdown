@@ -1,8 +1,8 @@
-# countdown
-Projeto Countdown
+# Countdown
+Projeto Countdown.
 
 ## Descrição
 Criação de contagens regressivas para uma data.
 
 ## Objetivo
-Melhorar minhas habilidades com JavaScript
+Melhorar minhas habilidades com JavaScript.
