@@ -39,6 +39,21 @@ function cliqueForaModal(event) {
   }
 }
 
+function handleClickDelete(countdown, title, modal) {
+  countdown.deleteCountdown(title);
+  localStorage.removeItem(title);
+  modal.classList.remove('ativo');
+  
+  const indexofInput = events.indexOf(title);
+  events.splice(indexofInput, 1);
+
+  const msgErro = document.querySelector(`[data-erro]`);
+  const containerMsgErro = document.querySelector('.container-msg-erro');
+  if(msgErro) {
+    containerMsgErro.removeChild(msgErro);
+  }
+}
+
 function addClickBtnDelete(countdown, event) {
   const botoes = document.querySelectorAll('.btn-delete');
   if(botoes) {
@@ -58,17 +73,6 @@ function addClickBtnDelete(countdown, event) {
   }
 }
 
-function handleClickDelete(countdown, title, modal) {
-  countdown.deleteCountdown(title);
-  localStorage.removeItem(title);
-  modal.classList.remove('ativo');
-  const msgErro = document.querySelector(`[data-erro]`);
-  const containerMsgErro = document.querySelector('.container-msg-erro');
-  if(msgErro) {
-    containerMsgErro.removeChild(msgErro);
-  }
-}
-
 let events = [];
 
 function handleClick(event) {
@@ -76,6 +80,7 @@ function handleClick(event) {
   const inputDate = document.getElementById('date').value;
   const inputEvent = document.getElementById('event').value;
   if(inputDate && inputEvent) {
+    
     const msgErro = document.querySelector(`[data-erro]`);
     const containerMsgErro = document.querySelector('.container-msg-erro');
 
@@ -95,5 +100,7 @@ function handleClick(event) {
     }
   }
 }
+
+console.log(events);
 
 addDate.addEventListener('click', handleClick);
