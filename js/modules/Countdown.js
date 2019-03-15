@@ -44,15 +44,15 @@ export default class Countdown {
 
   createElementCountdown(title) {
     const containerResult = document.querySelector('.container-result');
+
     const div = document.createElement('div');
     const h1 = document.createElement('h1');
     const button = document.createElement('button');
     const span = document.createElement('span');
 
-    title = title.replace(' ', '-');
-    div.classList.add('content', title);
+    div.setAttribute('data-container-countdown', title);
     h1.classList.add('title');
-    h1.innerText = `Tempo para o ${title.replace('-', ' ')}`;
+    h1.innerText = `Tempo para o ${title}`;
     button.classList.add('btn-delete');
     button.innerHTML = '<i class="far fa-trash-alt"></i>';
     span.setAttribute('data-event', title);
@@ -62,7 +62,7 @@ export default class Countdown {
 
     containerResult.appendChild(div);
     
-    span.innerText = `Faltam ${this.total.days} dias, ${this.total.hours} horas, ${this.total.minutes} minutos e ${this.total.seconds} segundos para o ${title.replace('-', ' ')}!`
+    span.innerText = `Faltam ${this.total.days} dias, ${this.total.hours} horas, ${this.total.minutes} minutos e ${this.total.seconds} segundos para o ${title}!`
     
     this.doCountdown(span, title);
   }
@@ -84,7 +84,7 @@ export default class Countdown {
   }
 
   deleteCountdown(element) {
-    const div = document.querySelector(`.${element.replace(' ', '-')}`);
+    const div = document.querySelector(`[data-container-countdown="${element}"]`);
     if(div) {
       div.remove();
       this.verificaCountdown = false;

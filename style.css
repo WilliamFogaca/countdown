@@ -137,7 +137,7 @@ input {
   border: 2px solid #a70000;
 }
 
-.content {
+[data-container-countdown] {
   display: flex;
   justify-content: center;
   align-items: center;
