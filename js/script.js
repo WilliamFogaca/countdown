@@ -92,16 +92,23 @@ function handleClick(event) {
   }
 
   if (inputDate && inputEvent) {
-    const tempoParaData = new Countdown(`${inputDate} 23:59:59 GMT-0300`);
+    const futureDate = new Date(`${inputDate} 23:59:59 GMT-0300`).getTime();
+    const actualDate = new Date().getTime();
 
-    if (events.indexOf(inputEvent.toUpperCase()) === -1 && !localStorage[inputEvent]) {
-      saveValuesLocalStorage(inputDate, inputEvent);
-      CreateCountdownElement(inputEvent, tempoParaData);
+    if(!((futureDate - actualDate) < 0)) {
+      const tempoParaData = new Countdown(`${inputDate} 23:59:59 GMT-0300`);
 
-      events.push(inputEvent.toUpperCase());
-      addClickBtnDelete(tempoParaData, inputEvent);
-    } else {
-      CreateErrorMessage(inputEvent, 1);
+      if (events.indexOf(inputEvent.toUpperCase()) === -1 && !localStorage[inputEvent]) {
+        saveValuesLocalStorage(inputDate, inputEvent);
+        CreateCountdownElement(inputEvent, tempoParaData);
+
+        events.push(inputEvent.toUpperCase());
+        addClickBtnDelete(tempoParaData, inputEvent);
+      } else {
+        CreateErrorMessage(inputEvent, 1);
+      }
+    }else {
+      CreateErrorMessage(inputEvent, 3);
     }
   } else {
     CreateErrorMessage(inputEvent, 2);
